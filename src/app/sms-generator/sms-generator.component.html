@@ -1,0 +1,47 @@
+<!--<h2>SMS disponibles</h2>
+<div class="available-sms-list">
+  <div *ngFor="let sms of availableSmsList" cdkDrag [cdkDragData]="sms" class="sms-item">
+    {{ sms.message }}
+  </div>
+</div>
+
+<h2>SMS a enviar</h2>
+<div class="sms-list-container" cdkDropList [cdkDropListData]="selectedSmsList" (cdkDropListDropped)="drop($event)">
+  <div *ngFor="let sms of selectedSmsList" cdkDrag [cdkDragData]="sms" class="sms-item">
+    {{ sms.message }}
+  </div>
+</div>
+
+<button (click)="enviarSMS()">Enviar SMS Masivos</button>-->
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>SMS disponibles</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="availableSmsList"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let sms of availableSmsList" cdkDrag [cdkDragData]="sms" class="sms-item"  [class.sent]="sms.envioExitoso">
+        {{ sms.message }} ({{ sms.phoneNumber }}) - {{ sms.envioExitoso ? 'Enviado Exitosamente' : 'No enviado' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>SMS a enviar</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let sms of done" cdkDrag [cdkDragData]="sms" class="sms-item"  [class.sent]="sms.envioExitoso">
+        {{ sms.message }} ({{ sms.phoneNumber }}) - {{ sms.envioExitoso ? 'Enviado Exitosamente' : 'No enviado' }}
+   
+    </div>
+    </div>
+  </div>
+  
+</div>
+<button (click)="enviarSMS()">Enviar SMS Masivos</button>
