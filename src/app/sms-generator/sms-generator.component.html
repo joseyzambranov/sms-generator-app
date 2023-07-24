@@ -45,3 +45,10 @@
   
 </div>
 <button (click)="enviarSMS()">Enviar SMS Masivos</button>
+
+<div class="graph-container">
+  <ngx-graph [links]="graphLinks" [nodes]="graphNodes">
+    <ngx-graph-node *ngFor="let node of graphNodes" [id]="node.id" [label]="node.label"></ngx-graph-node>
+    <ngx-graph-link *ngFor="let link of graphLinks" [source]="link.source" [target]="link.target"></ngx-graph-link>
+  </ngx-graph>
+</div>

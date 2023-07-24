@@ -3,6 +3,9 @@ import { CdkDragDrop, moveItemInArray ,transferArrayItem} from '@angular/cdk/dra
 import { SmsData } from '../sms-data.model';
 import { from, of } from 'rxjs';
 import { delay, mergeMap, tap } from 'rxjs/operators';
+import { NgxGraphModule } from '@swimlane/ngx-graph'; 
+
+
 
 @Component({
   selector: 'app-sms-generator',
@@ -10,48 +13,27 @@ import { delay, mergeMap, tap } from 'rxjs/operators';
   styleUrls: ['./sms-generator.component.css']
 })
 export class SmsGeneratorComponent implements OnInit {
-/*
-  availableSmsList: SmsData[] = [
-    { id: 1, phoneNumber: '123456789', message: 'Hola, ¿cómo estás?' },
-    { id: 2, phoneNumber: '987654321', message: '¡Hola desde Angular!' }
-  ];
-
-  selectedSmsList: SmsData[] = [
-    
-  ];
-
-  drop(event: CdkDragDrop<SmsData[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(this.selectedSmsList, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-
-  enviarSMS() {
-    from(this.selectedSmsList).pipe(
-      mergeMap((sms: SmsData) => this.enviarSMSIndividual(sms))
-    ).subscribe(
-      () => console.log('SMS enviado exitosamente.'),
-      (error) => console.error('Error al enviar SMS:', error)
-    );
-  }
-
-  enviarSMSIndividual(sms: SmsData) {
-    return of(sms); // En este ejemplo, simplemente retornamos el SMS.
-  }
-*/
+  
 availableSmsList: SmsData[] = [
   { id: 1, phoneNumber: '123456789', message: 'Hola, ¿cómo estás?' },
   { id: 2, phoneNumber: '987654321', message: '¡Hola desde Angular!' }
 ];
 
 done: SmsData[] = [];
+
+graphLinks = [
+  { source: 'node1', target: 'node2' },
+  { source: 'node2', target: 'node3' },
+  // Agrega más enlaces aquí según tus necesidades
+];
+
+// Definir la propiedad graphNodes
+graphNodes = [
+  { id: 'node1', label: 'Nodo 1' },
+  { id: 'node2', label: 'Nodo 2' },
+  { id: 'node3', label: 'Nodo 3' },
+  // Agrega más nodos aquí según tus necesidades
+];
  
 
   drop(event: CdkDragDrop<SmsData[]>) {
@@ -87,6 +69,8 @@ done: SmsData[] = [];
         sms.mensajeRespuesta = 'El SMS fue enviado exitosamente.';
       })
   )}
+
+
   constructor() { }
 
   ngOnInit(): void {
